@@ -1,7 +1,7 @@
 # Elevate
-
+[![Elevate App](https://img.shields.io/badge/Deployed_Elevate_App-blue)](https://qoryhanisagal.github.io/Elevate/)
 ### Abstract:
-**Elevate** is a motivational poster generator app designed to inspire creativity and positivity. It allows users to:
+**Elevate** is a motivational poster generator app designed to inspire creativity and positivity. 
 
 ## Features
 - Generate random posters with pre-loaded images, quotes, and titles.
@@ -29,8 +29,9 @@ This app solves the problem of needing a quick, user-friendly way to generate an
     ```bash 
     open index.html
     ```
+
 ### Preview of App:
-Insert a GIF or screenshot of your app here, showing off your favorite feature (e.g., the random poster generation or saved posters grid). Use Canva for Mock Up
+![App Screenshot](./assets/screenshot.png)
 
 ### Context:
 This project was completed as part of the **Mod 2 Software Engineering curriculum** at Turing School of Software & Design.
@@ -39,8 +40,9 @@ This project was completed as part of the **Mod 2 Software Engineering curriculu
 
 ### Contributors:
 **Sequoyah Dozier**
-- **GitHub:**
-- **LinkedIn:** 
+- [**GitHub Repo**](https://github.com/qoryhanisagal)
+- [**LinkedIn Profile**](https://www.linkedin.com/in/sequoyahdozier/)
+
 ### Learning Goals:
 
 The primary learning goals for **Elevate** included:
@@ -49,6 +51,7 @@ The primary learning goals for **Elevate** included:
 - Implementing **event listeners** to handle user interactions.
 - Building dynamic HTML content with JavaScript.
 - Strengthening debugging and troubleshooting skills.
+-Deploy a static app using GitHub Pages.
 
 ### Wins + Challenges:
 
@@ -59,5 +62,7 @@ The primary learning goals for **Elevate** included:
 3.
 
 **Challenges**
+
 1.
 2.
+3.

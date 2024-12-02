@@ -3,7 +3,7 @@
 *:before,
 *:after {
   box-sizing: border-box;
-  font-family: "EB Garamond", serif;
+  font-family: "Lato", Arial, Helvetica, sans-serif;
   margin: auto;
   text-align: center;
 }

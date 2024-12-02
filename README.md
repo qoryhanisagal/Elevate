@@ -1,5 +1,5 @@
 # Elevate
-[![Elevate App](https://img.shields.io/badge/Deployed_Elevate_App-blue)](https://qoryhanisagal.github.io/Elevate/)
+[![Elevate App](https://img.shields.io/badge/Deployed_Elevate_App-purple)](https://qoryhanisagal.github.io/Elevate/)
 ### Abstract:
 **Elevate** is a motivational poster generator app designed to inspire creativity and positivity. 
 

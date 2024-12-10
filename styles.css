@@ -1,3 +1,5 @@
+/* ======== BASE ======== */
+/* Define foundational styles like colors, fonts, and general resets */
 /* ~~~~~ GLOBAL RULES ~~~~~ */
 *,
 *:before,
@@ -33,11 +35,51 @@ button:hover {
   display: none!important;
 }
 
-/* ~~~~~ MAIN POSTER SECTION ~~~~~ */
+/* ======== LAYOUT ======== */
+/* Define styles for the overall structure of the page (grid, flexbox, etc.) */
+
+/* ======== MAIN POSTER SECTION ========*/
 .main-poster {
   height: 100vh;
 }
+/* ======== POSTER FORM SECTION ========*/
+.poster-form {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 
+.poster-form h2 {
+  margin-bottom: 30px;
+}
+
+.poster-form form {
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.poster-form input {
+  display: block;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+/* ======== SAVED POSTER SECTION ========*/
+.saved-posters {
+  padding: 40px;
+}
+
+.saved-posters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+/* ======== COMPONENTS ======== */
+/* Style reusable components like buttons, posters, etc. */
 .poster {
   background: radial-gradient(circle, rgba(174, 177, 177, 1) 0%, rgba(6, 6, 6, 1) 100%);
   display: flex;
@@ -73,49 +115,6 @@ button:hover {
   margin: 10px;
 }
 
-/* ~~~~~ POSTER FORM SECTION ~~~~~ */
-.poster-form {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.poster-form h2 {
-  margin-bottom: 30px;
-}
-
-.poster-form form {
-  align-content: center;
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-}
-
-.poster-form input {
-  display: block;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.poster-form .divider {
-  border-bottom: 1px solid black;
-  margin: auto;
-  margin-bottom: 20px;
-  width: 400px;
-}
-
-/* ~~~~~ SAVED POSTER SECTION ~~~~~ */
-.saved-posters {
-  padding: 40px;
-}
-
-.saved-posters-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-  padding: 20px;
-}
-
 .mini-poster {
   background: black;
   color: white;
@@ -143,4 +142,110 @@ button:hover {
   letter-spacing: 5px;
   margin-bottom: 10px;
   text-transform: uppercase;
+}
+
+/* ======== Unmotivational Posters Section ========*/
+.show-unmotivational,
+.back-to-main-unmotivational {
+  background: black;
+  color: white;
+  font-size: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.show-unmotivational:hover,
+.back-to-main-unmotivational:hover {
+  background: darkslateblue;
+}
+
+.unmotivational-posters-grid {
+  display: flex;
+  flex-wrap: wrap;
+  /* Ensures items wrap onto the next line if needed */
+  justify-content: center;
+  /* Distributes items evenly across the row */
+  gap: 20px;
+  /* Adds consistent spacing between posters */
+  padding: 20px;
+  /* Adds spacing around the grid */
+}
+
+.unmotivational-poster {
+  display: flex;
+  flex-direction: column;
+  /* Stacks the image and text vertically */
+  align-items: center;
+  /* Centers items horizontally */
+  justify-content: space-between;
+  /* Distributes space between the content */
+  background-color: #333;
+  /* Matches the design */
+  color: white;
+  /* Makes text readable */
+  width: 200px;
+  /* Fixed width for consistent layout */
+  height: 300px;
+  /* Fixed height for consistency */
+  padding: 10px;
+  /* Adds padding inside each poster */
+  border-radius: 10px;
+  /* Rounds the corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Adds depth */
+}
+
+.unmotivational-poster img {
+  max-width: 100%;
+  /* Makes sure the image doesn't overflow */
+  height: auto;
+  /* Keeps the aspect ratio */
+  border-radius: 5px;
+  /* Optional: Slight rounding on images */
+}
+
+.unmotivational-poster h2 {
+  font-size: 16px;
+  /* Adjust font size */
+  text-transform: uppercase;
+  /* Makes text uppercase */
+  margin: 10px 0;
+  /* Adds spacing around title */
+}
+
+.unmotivational-poster h4 {
+  font-size: 14px;
+  /* Smaller font for the quote */
+  text-align: center;
+  /* Centers the quote text */
+  margin: 5px 0;
+  /* Adds spacing around quote */
+}
+
+/* ======== UTILITIES ======== */
+/* Define my utility classes for quick customizations like spacing, text alignment */
+
+.divider {
+  border-bottom: 1px solid black;
+  margin: auto;
+  margin-bottom: 20px;
+  width: 400px;
+}
+
+/* ======== MEDIA QUERIES ======== */
+/* Add responsive design styles */
+
+@media (max-width: 768px) {
+  .saved-posters-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mini-poster {
+    height: 300px;
+    width: 300px;
+  }
 }

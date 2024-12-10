@@ -1,8 +1,9 @@
-// query selector variables go here 👇
-
-// we've provided you with some data to work with 👇
-// tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
+// ======== GLOBAL VARIABLES ========
+// Define global variables here 👇, such as data arrays, or tracking app state
 var images = [
+  // Array to store image URLs*/
+  // This array stores the paths or URLs for all the images the app can use for posters.*/
+  // It keeps app data organized and accessible for when the app generate random posters.*/
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
   "./assets/butterfly.jpg",
@@ -22,7 +23,55 @@ var images = [
   "./assets/tiger.jpg",
   "./assets/turtle.jpg"
 ];
+
+var unmotivationalImages = [
+  "./assets/failure.jpg",
+  "./assets/mediocrity.jpg",
+  "./assets/regret.jpg",
+  "./assets/futility.jpg",
+  "./assets/defeat.jpg",
+  "./assets/hopelessness.jpg",
+  "./assets/neglect.jpg",
+  "./assets/fear.jpg",
+  "./assets/apathy.jpg",
+  "./assets/misery.jpg",
+  "./assets/blame.jpg",
+  "./assets/doubt.jpg"
+];
+
+var unmotivationalTitles = [
+  "Failure",
+  "Mediocrity",
+  "Regret",
+  "Futility",
+  "Defeat",
+  "Hopelessness",
+  "Neglect",
+  "Fear",
+  "Apathy",
+  "Misery",
+  "Blame",
+  "Doubt"
+];
+
+var unmotivationalQuotes = [
+  "Why bother trying? It's probably not worth it.",
+  "Dreams are just that—dreams.",
+  "Hard work rarely pays off.",
+  "You're not good enough.",
+  "It's too late to start now.",
+  "Stay in your comfort zone; it's safer.",
+  "Happiness is overrated.",
+  "Giving up is always an option.",
+  "No one cares about your effort.",
+  "Why take risks when you can stay stagnant?",
+  "Expect disappointment and you'll never be disappointed.",
+  "Success is for other people, not you."
+];
 var titles = [
+  // Array to store motivational titles
+  // This array contains the motivational titles that will be used for posters. 
+  // Each poster generated will jave a randomly selected title from the list.
   "determination",
   "success",
   "inspiration",
@@ -60,6 +109,8 @@ var titles = [
   "wisdom"
 ];
 var quotes = [
+  // Array to store motivational quotes
+  // These quotes are randomly selected to provide inspirtition in the generated psoter
   "Don’t downgrade your dream just to fit your reality, upgrade your conviction to match your destiny.",
   "You are braver than you believe, stronger than you seem and smarter than you think.",
   "You are confined only by the walls you build yourself.",
@@ -100,20 +151,178 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = [];
+// Array to store saved posters
+// This array will be used to store posters that the user descides to save.
+// It start aas empty, and posters are added over time as the user interacts with the application.
 var currentPoster;
+// This variable holds the currently displayed poster
+// It starts as an object with the current image URL, title, and quote.
+// It will chnage every time a new poster is generated.
 
-// event listeners go here 👇
+// ======== QUERY SELECTORS ========
+// Select DOM elements that will be manipulated in the code
+var makePosterButton = document.querySelector(".make-poster");
+var imageInput = document.getElementById("poster-image-url")
+var titleInput = document.getElementById("poster-title");
+var quoteInput = document.getElementById("poster-quote");
+var posterImg = document.querySelector(".poster-img");
+var posterTitle = document.querySelector(".poster-title");
+var posterQuote = document.querySelector(".poster-quote");
+var mainPosterSection = document.querySelector(".main-poster");
+var formSection = document.querySelector(".poster-form");
+var savedPostersSection = document.querySelector(".saved-posters");
+var showFormButton = document.querySelector(".show-form");
+var showRandomButton = document.querySelector(".show-random");
+var savePosterButton = document.querySelector(".save-poster");
+var viewSavedButton = document.querySelector(".show-saved");
+var backToMainButton = document.querySelector(".back-to-main");
+var savedPostersGrid = document.querySelector(".saved-posters-grid");
+var showUnmotivational = document.querySelector(".show-unmotivational")
+var backToMainUnmotivational = document.querySelector(".back-to-main-unmotivational")
 
-// functions and event handlers go here 👇
-// (we've provided two to get you started)!
+// ======== UTILITY FUNCTIONS ========
+// Helper functions that perform small, reusable tasks
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
 function createPoster(imageURL, title, quote) {
   return {
-    id: Date.now(), 
-    imageURL: imageURL, 
-    title: title, 
-    quote: quote}
+    id: Date.now(),
+    imageURL: imageURL,
+    title: title,
+    quote: quote
+  };
 }
+
+function updatePosterInDOM(poster) {
+  posterImg.src = poster.imageURL;
+  posterTitle.innerText = poster.title;
+  posterQuote.innerText = poster.quote;
+}
+
+// ======== MAIN FUNCTIONS ========
+// Define core app functionality here
+// Add delete functionality for saved posters
+function deletePoster(event) {
+  if (event.target.closest(".mini-poster")) {
+    const posterToDelete = event.target.closest(".mini-poster");
+    const indexToDelete = [...savedPostersGrid.children].indexOf(posterToDelete);
+    savedPosters.splice(indexToDelete, 1);
+    displaySavedPosters(); // Refresh the saved posters grid
+  }
+}
+
+// Add functionality to create a custom poster
+function createCustomPoster(event) {
+  event.preventDefault();
+  var customImage = imageInput.value;
+  var customTitle = titleInput.value;
+  var customQuote = quoteInput.value;
+  currentPoster = createPoster(customImage, customTitle, customQuote);
+  updatePosterInDOM(currentPoster);
+  showView(mainPosterSection);
+}
+
+function generateRandomPoster() {
+  var randomImage = images[getRandomIndex(images)];
+  var randomTitle = titles[getRandomIndex(titles)];
+  var randomQuote = quotes[getRandomIndex(quotes)];
+  currentPoster = createPoster(randomImage, randomTitle, randomQuote);
+  updatePosterInDOM(currentPoster);
+  console.log("Random poster generated:", currentPoster);
+}
+
+function savePoster() {
+  if (!savedPosters.some(poster => poster.id === currentPoster.id)) {
+    savedPosters.push(currentPoster);
+    console.log("Poster saved:", currentPoster);
+  } else {
+    console.log("Poster already saved.");
+  }
+}
+
+function displaySavedPosters() {
+  savedPostersGrid.innerHTML = ""; // Clear existing posters
+  savedPosters.forEach(poster => {
+    var miniPoster = document.createElement("div");
+    miniPoster.classList.add("mini-poster");
+    miniPoster.innerHTML = `
+      <img src="${poster.imageURL}" alt="Poster Image">
+      <h2>${poster.title}</h2>
+      <h4>${poster.quote}</h4>
+    `;
+    savedPostersGrid.appendChild(miniPoster);
+  });
+}
+
+function displayUnmotivationalPosters() {
+  var grid = document.querySelector(".unmotivational-posters-grid"); // Select the unmotivational posters grid
+  grid.innerHTML = ""; // Clear existing content
+
+  // Loop through the unmotivational posters data
+  for (var i = 0; i < unmotivationalImages.length; i++) {
+    var posterDiv = document.createElement("div"); // Create a container for each poster
+    posterDiv.classList.add("unmotivational-poster"); // Add class for styling
+    posterDiv.innerHTML = `
+      <img src="${unmotivationalImages[i]}" alt="${unmotivationalTitles[i]}">
+      <h2>${unmotivationalTitles[i]}</h2>
+      <h4>${unmotivationalQuotes[i]}</h4>
+    `;
+    grid.appendChild(posterDiv); // Add the poster to the grid
+  }
+}
+
+// ======== EVENT HANDLERS ========
+// Define event handler functions here
+
+function handleShowForm() {
+  showView(formSection);
+}
+
+function handleShowSaved() {
+  showView(savedPostersSection);
+  displaySavedPosters();
+}
+
+function handleBackToMain() {
+  showView(mainPosterSection);
+}
+
+function handleShowUnmotivational() {
+  showView(document.querySelector(".unmotivational-posters"));
+  displayUnmotivationalPosters();
+}
+
+function handleBackToMainFromUnmotivational() {
+  showView(mainPosterSection);
+}
+
+// ======== EVENT LISTENERS ========
+// Add event listeners to make the page interactive
+
+showRandomButton.addEventListener("click", generateRandomPoster);
+savePosterButton.addEventListener("click", savePoster);
+showFormButton.addEventListener("click", handleShowForm);
+viewSavedButton.addEventListener("click", handleShowSaved);
+backToMainButton.addEventListener("click", handleBackToMain);
+makePosterButton.addEventListener("click", createCustomPoster);
+savedPostersGrid.addEventListener("dblclick", deletePoster);
+showUnmotivational.addEventListener("click", handleShowUnmotivational);
+backToMainUnmotivational.addEventListener("click", handleBackToMainFromUnmotivational);
+
+// ======== VIEW MANAGEMENT ========
+// Functions to toggle views
+
+function showView(viewToShow) {
+  mainPosterSection.classList.add("hidden");
+  formSection.classList.add("hidden");
+  savedPostersSection.classList.add("hidden");
+  viewToShow.classList.remove("hidden");
+  console.log("View switched to:", viewToShow.className);
+}
+
+// ======== INITIALIZATION ========
+// Set up the initial state of the app
+generateRandomPoster();

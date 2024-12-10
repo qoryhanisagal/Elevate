@@ -57,12 +57,21 @@ The primary learning goals for **Elevate** included:
 
 **Wins**
 
-1. 
-2. 
-3.
+1. None
+2. None
+3. None
 
 **Challenges**
 
-1.
-2.
-3.
+1.	Dynamic Layout Adjustment
+      - Struggled initially with using CSS flexbox to create a flexible layout for the “Unmotivational Posters” grid. Ensuring that the grid adapted to various screen widths without breaking the alignment required several iterations and debugging.
+      - Possible Solution: Review flexbox documentation and apply gap, justify-content, and flex-wrap properties effectively to achieve the desired layout.
+2.	Event Listener Conflicts
+      - Encountered issues with overlapping event listeners, particularly with buttons triggering multiple unintended actions. This was caused by duplicate event listener assignments in the JavaScript code.
+      - Possible Solution: Refactor the event listener assignments, ensuring each function was tied to a specific button only once. Utilize console logs and debugging tools to trace and resolve these issues.
+3.	Styling Consistency
+      - Maintaining a consistent visual style between different sections of the app (e.g., main page, saved posters, unmotivational posters) was challenging. Slight variations in button or grid styles created a disjointed experience.
+      - Possible Solution: Consolidate CSS classes and reuse existing styles to ensure uniformity across all sections, while adding section-specific overrides where necessary.
+4.	Image and Text Overflow
+      - Faced issues with images and text overflowing their containers in smaller viewports, disrupting the layout.
+      - Possible Solution: Apply max-width, height:auto, and text-align properties to ensure proper scaling and alignment. Add media queries to fine-tune the layout for smaller screens.
